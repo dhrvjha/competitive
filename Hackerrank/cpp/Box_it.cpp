@@ -3,58 +3,51 @@
 using namespace std;
 //Implement the class Box  
 class Box{
-//l,b,h are integers representing the dimensions of the box
-private:
-    int l,b,h;
-// The class should have the following functions : 
-public:
-// Constructors: 
-// Box();
-// Box(int,int,int);
-// Box(Box);
-Box(){
-    scanf("%d%d%d",&l,&b,&h);
-}
-Box(int a,int b,int c){
-    this->l = a;
-    this->b = b;
-    this->h = c;
-}
-Box(Box &ba){
-    this->l = ba.getLength();
-    this->b = ba.getBreadth();
-    this->h = ba.getHeight();
-}
-// int getLength(); // Return box's length
-const int getLength(){
-    return this->l;
-}
-// int getBreadth (); // Return box's breadth
-const int getBreadth(){
-    return this->b;
-}
-// int getHeight ();  //Return box's height
-const int getHeight(){
-    return this->h;
-}
-// long long CalculateVolume(); // Return the volume of the box
-const long long CalculateVolume(){
-    return this->l*this->h*this->b;
-}
-//Overload operator < as specified
-UIStream& operator<<(UIStream& os, std::ostream& (*pf)(std::ostream&));
-ostream& operator<<(ostream& out, Box& B){
-
-}
-bool operator<(Box &ba){
-    return this->CalculateVolume()>ba.CalculateVolume();
-}
-//bool operator<(Box& b)
-
-//Overload operator << as specified
-//ostream& operator<<(ostream& out, Box& B)
+    private:
+    int l, b, h;
+    public:
+    Box(){
+        l = 0;
+        b = 0;
+        h = 0;
+    }
+    Box(int length, int breadth, int height){
+        l = length;
+        b = breadth;
+        h = height;
+    }
+    Box(const Box& B){
+        l = B.l;
+        b = B.b;
+        h = B.h;
+    }
+    
+    int getLenght(){
+        return l;
+    }
+    int getBreadth(){
+        return b;
+    }
+    int getHeight(){
+        return h;
+    }
+    long long CalculateVolume(){
+        return (long long)l*b*h;
+    }
+    
+    friend bool operator < ( Box&A,Box& B){
+        if( (A.l < B.l) || ((A.b < B.b) && (A.l == B.l)) || ((A.h < B.h) && (A.l == B.l) && (A.b == B.b)) ){
+            return true;
+        }else{
+            return false;
+        }
+    };
+    
+    friend ostream& operator<< (ostream& output, const Box& B){
+        output << B.l << " " << B.b << " " << B.h;
+        return output;
+    }
 };
-
 
 void check2()
 {
