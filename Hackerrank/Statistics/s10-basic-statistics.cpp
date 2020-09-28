@@ -12,7 +12,7 @@ void sort(int *array, int size){
     for (int i=1;i<size;i++){
         key = array[i];
         j = i-1;
-        while(j>=0 && array[i] > key){
+        while(j>=0 && array[j] > key){
             array[j+1] = array[j];
             j--;
         }
@@ -57,6 +57,8 @@ int main() {
     for (int i=0;i<size;sum+=array[i],i++)
         scanf("%d",&array[i]);
 
-    printf("%.1f\n%.1f\n%d\n",(float)sum/(float)size,median(array,size),mode(array,size));
+    printf("%.1f\n%.1f\n",(float)sum/(float)size,median(array,size));
+    printf("%d\n",mode(array,size));
+    delete array;
     return 0;
 }
