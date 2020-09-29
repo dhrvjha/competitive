@@ -7,28 +7,18 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'dynamicArray' function below.
+ * Complete the 'rotateLeft' function below.
  *
  * The function is expected to return an INTEGER_ARRAY.
  * The function accepts following parameters:
- *  1. INTEGER n
- *  2. 2D_INTEGER_ARRAY queries
+ *  1. INTEGER d
+ *  2. INTEGER_ARRAY arr
  */
-#define ll long long
-vector<ll> dynamicArray(int n, vector<vector<ll>> queries) {
-    vector<vector<ll>> seq(n);
-    vector<ll> ans;
-    int lastAnswer = 0;
-    for (int i=0;i<queries.size();i++){
-        ll x = queries[i][1];
-        ll y = queries[i][2];
-        if (queries[i][0] == 1){
-            seq[(x^lastAnswer)%2].push_back(y);
-        } else if (queries[i][0] == 2){
-            lastAnswer =seq[(x^lastAnswer)%2][y];
-            ans.push_back(lastAnswer);
-        }
-    }
+
+vector<int> rotateLeft(int d, vector<int> arr) {
+    vector<int> ans;
+    ans.insert(ans.begin(),arr.begin()+d,arr.end());
+    ans.insert(ans.begin()+ans.size(),arr.begin(),arr.begin()+d);
     return ans;
 }
 
@@ -41,38 +31,34 @@ int main()
 
     vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-    ll n = stoi(first_multiple_input[0]);
+    int n = stoi(first_multiple_input[0]);
 
-    ll q = stoi(first_multiple_input[1]);
+    int d = stoi(first_multiple_input[1]);
 
-    vector<vector<ll>> queries(q);
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-    for (int i = 0; i < q; i++) {
-        queries[i].resize(3);
+    vector<string> arr_temp = split(rtrim(arr_temp_temp));
 
-        string queries_row_temp_temp;
-        getline(cin, queries_row_temp_temp);
+    vector<int> arr(n);
 
-        vector<string> queries_row_temp = split(rtrim(queries_row_temp_temp));
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
 
-        for (int j = 0; j < 3; j++) {
-            ll queries_row_item = stoi(queries_row_temp[j]);
-
-            queries[i][j] = queries_row_item;
-        }
+        arr[i] = arr_item;
     }
 
-    vector<ll> result = dynamicArray(n, queries);
+    vector<int> result = rotateLeft(d, arr);
 
     for (int i = 0; i < result.size(); i++) {
-        fout << result[i];
+        cout << result[i];
 
         if (i != result.size() - 1) {
-            fout << "\n";
+            cout << " ";
         }
     }
 
-    fout << "\n";
+    cout << "\n";
 
     fout.close();
 
