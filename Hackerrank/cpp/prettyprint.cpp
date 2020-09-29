@@ -10,31 +10,14 @@ int main() {
 		double A; cin >> A;
 		double B; cin >> B;
 		double C; cin >> C;
-        int a = (int)A;
-        printf("0x%x\n",a);
-        int b = B;
-        int cou = 0;
-        while (b > 0){
-            cou++;
-            b/=10;
-        }
-        cou = 15- (cou+4);
-        while(cou--)
-            printf("_");
-        if (B>0)
-            printf("+");
-        else
-            printf("-");
-        printf("%.2f\n",B);
+        cout << hex << left << showbase << nouppercase; 
+        cout << (long long) A << endl;
 
-        int c = C;
-        cou = 0;
-        while (c>10){
-            cou++;
-            c/=10;
-            C/=10;
-        }
-        printf("%.9fE+0%d\n",C,cou);
+        cout << dec << right << setw(15) << setfill('_') << showpos << fixed << setprecision(2);
+        cout << B << endl;
+
+        cout << scientific << uppercase << noshowpos << setprecision(9); 
+        cout << C << endl;
 	}
 	return 0;
 }
